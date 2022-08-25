@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.microsoft.rdc.androidx"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application>
+        <!-- This MSAL activity is put in the debug specific manifest because we have different
+             base64 encoded package signature between the debug apk vs the release apk
+        -->
+        <activity android:name="com.microsoft.identity.client.BrowserTabActivity"
+            tools:node="merge">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="com.microsoft.rdc.androidx"
+                    android:path="/EUvr8Znq2S0AZ0wNol2WoZr4ru0="
+                    android:scheme="msauth" />
+                <!-- EUvr8Znq2S0AZ0wNol2WoZr4ru0%3D -->
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

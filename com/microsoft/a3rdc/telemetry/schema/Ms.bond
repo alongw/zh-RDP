@@ -1,0 +1,18 @@
+namespace Ms
+
+// Custom data types
+// These types could be used in all Common Schema events.
+// Some libraries may provide additional support for logging these data types.
+using Guid = string;
+
+// A date/time in ISO 8601 UTC format (see http://en.wikipedia.org/wiki/ISO_8601#UTC)
+using DateTime = string;
+
+// A single-character prefix followed by ':' followed by an ID
+using PrefixedId = string;
+
+// A Device ID according to https://osgwiki.com/wiki/CommonSchema/device_id
+using DeviceId = PrefixedId;
+
+// A User ID according to https://osgwiki.com/wiki/CommonSchema/user_id
+using UserId = PrefixedId;

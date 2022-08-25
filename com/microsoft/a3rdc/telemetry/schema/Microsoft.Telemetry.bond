@@ -1,0 +1,105 @@
+import "Ms.bond"
+
+namespace Microsoft.Telemetry
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Schema Definition: Part B - Base
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+[Description("The abstract common base of all domains.")]
+struct Domain
+{
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Data Shape Definitions
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+[Description("Data struct to contain only C section with custom fields.")]
+struct Base
+{
+    [Name("ItemTypeName")]
+    [Description("Name of item (B section) if any. If telemetry data is derived straight from this, this should be null.")]
+    10: optional string baseType = nothing;
+};
+
+[Description("Data struct to contain both B and C sections.")]
+struct Data<TDomain> : Base
+{
+    [Name("Item")]
+    [Description("Container for data item (B section).")]
+    20: required TDomain baseData;
+};
+
+[Description("Base struct for defining typed extensions to contain logically grouped variables")]
+struct Extension
+{
+    // Optional field for the version of the extension schema. The format is a string with major and minor such as 1.0
+    [Name("ExtensionVersion")]
+    0: optional string ver = "1.0";
+};
+
+[Description("System variables for a telemetry item (Part A)")]
+struct Envelope
+{
+    // Required field for the version of the schema. The format is a string with major and minor such as 2.1.
+    [Name("SchemaVersion")]
+    10: required string ver;
+
+    // Name of telemetry item. Maps to Namespace.DataName or ProviderName.EventName when using Windows TraceLogging
+    [Name("DataTypeName")]
+    20: required string name;
+
+    // The time on the client when this event was created. Format: http://en.wikipedia.org/wiki/ISO_8601#UTC
+    [Name("DateTime")]
+    30: required Ms.DateTime time;
+
+    [Name("SamplingRate")]
+    40: optional double popSample = 100.0;
+
+    // ID used to help distinguish events in the sequence by indicating
+    // the current boot session.
+    // See "https://microsoft.sharepoint.com/teams/CommonSchema/Shared Documents/Schema Specs/SequenceField_PartA_CS2.0.docx?web=1"
+    [Name("Epoch")]
+    50: optional string epoch;
+
+    // Sequence field used to track absolute order of uploaded events.
+	// See "https://microsoft.sharepoint.com/teams/CommonSchema/Shared Documents/Schema Specs/SequenceField_PartA_CS2.0.docx?web=1"
+    [Name("SequenceNumber")]
+    60: optional int64 seqNum;
+
+    // This is a structured iKey (https://osgwiki.com/wiki/Structured_iKey) used
+    // to enable isolation of applications sharing the same telemetry events.
+    [Name("InstrumentationKey")]
+    70: optional string iKey;
+
+    // A collection of values bit-packed to represent how the event was processed
+    [Name("TelemetryProperties")]
+    80: optional int64 flags;
+
+    [Name("OsPlatform")]
+    90: optional string os;
+
+    [Name("OsVersion")]
+    100: optional string osVer;
+
+    [Name("ApplicationId")]
+    110: optional string appId;
+
+    [Name("ApplicationVersion")]
+    120: optional string appVer;
+
+    [Name("CorrelationVector")]
+    130: optional string cV;
+
+    // Header / identity extensions for semi-managed extensions use
+    // Keys in this space must be namespaced.
+    [Name("Tags")]
+    500: optional map<string, string> tags;
+
+    [Name("Extensions")]
+    510: optional map<string, bonded<Extension>> ext;
+
+    [Name("TelemetryData")]
+    999: optional bonded<Base> data;
+};

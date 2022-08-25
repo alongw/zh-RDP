@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+body {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+}
+
+h2 {
+  font-size: 1.3em;
+  text-align: left;
+  margin-bottom: 6px;
+  paddin-bottom: 0;
+}
+
+p {
+  margin: 6px 0 6px;
+}
+
+ul {
+  padding-right: 15px;
+  margin: 0px;
+}
+
+li {
+  width: auto;
+}
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr.clearer {
+  clear: both;
+}
+
+#container {
+  margin-top: 1em;
+  margin-right: auto;
+  margin-left: auto;
+  width: 95%;
+}
+
+@media (orientation:landscape) and (min-width:700px) {
+  #container {
+    margin-top: 1em;
+    margin-right: auto;
+    margin-left: auto;
+    width: 640px;
+  }
+}
