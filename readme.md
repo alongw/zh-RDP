@@ -1,5 +1,7 @@
 # Remote Desktop 简体中文汉化版 
 
+截至 2023 年，微软的官方版本已经有了对简体中文的支持，因此本项目很有可能会停止更新。
+
 >这是微软官方的远程桌面客户端简体中文汉化版  
 >详细请查看[https://www.alongw.cn/rdp](https://www.alongw.cn/rdp)  
   
